@@ -2,18 +2,21 @@
   <div class="row">
     <div class="col-md-12">
       <h1><%= @title %>的資料</h1>
-        <table>
-          <tr>
-            <td>書名：</td>
-            <td><%= @book.name %></td>
-          </tr>
-          <tr>
-            <td>作者：</td>
-            <td><%= @book.description %></td>
-          </tr>
-        </table>
-        <%= link_to "Back", books_path %>
-
     </div>
+    <div class="col-md-6">
+      <h4>書名：</h4>
+      <p><%= @book.name %></p>
+    </div>
+    <div class="col-md-6">
+      <h4>作者：</h4>
+      <p><%= @book.author %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+          <h4>內容簡介：</h4>
+          <p><%= simple_format(@book.description) %></p>
+    </div>
+    <%= link_to "Back", books_path, :class => "btn btn-primary pull-right" %>
   </div>
 </div>
