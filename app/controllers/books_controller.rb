@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, :only => [:show, :edit, :update, :destroy]
+  Num_max_per = 3
+
   def index
-    @books = Book.all
+    @books = Book.page(params[:page]).per(Num_max_per)
   end
 
   def new
