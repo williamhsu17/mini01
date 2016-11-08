@@ -17,23 +17,26 @@
             <th class = "text-center">說明</th>
             <th class = "text-center">閱讀進度</th>
             <th class = "text-center">加入日期</th>
-            <th class = "text-center"> </th>
+            <th class = "text-center"></th>
+            <th class = "text-center"></th>
+            <th class = "text-center"></th>
           </tr>
         </thead>
         <tbody>
           <% @books.each do |book|  %>
           <tr>
-            <td></td>
+            <td class = "text-center"><%= @count += 1 %></td>
             <td><%= book.name %></td>
             <td class = "text-center"><%= book.Category %></td>
             <td><%= book.author %></td>
             <td><%= book.description_short %></td>
-            <td class = "text-center"><%= book.progress %></td>
+            <td class = "text-center"><%= content_tag(:div, content_tag(:div, "#{book.progress}%", class: "progress-bar", role: "progressbar", "aria-valuenow" => "#{book.progress}", "aria-valuemin" => "0", "aria-valuemax" => "100", style: "width: #{book.progress}%;") , class: "progress") %>
+            </td>
             <td><%= book.created_at %></td>
 
-            <td><%= link_to "show", book_path(book), :class => "btn btn-default" %></td>
-            <td><%= link_to "edit", edit_book_path(book), :class => "btn btn-default" %></td>
-            <td><%= link_to "delete", book_path(book), :method => :delete, :class => "btn btn-danger" %></td>
+            <td><%= link_to "", book_path(book), :class => "btn btn-default glyphicon glyphicon-th-list" %></td>
+            <td><%= link_to "", edit_book_path(book), :class => "btn btn-default glyphicon glyphicon-edit" %></td>
+            <td><%= link_to "", book_path(book, :page => params[:page], :total_pages => @books.total_pages), :method => :delete, :class => "btn btn-danger glyphicon glyphicon-trash" %></td>
           </tr>
           <% end %>
         </tbody>

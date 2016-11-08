@@ -1,9 +1,15 @@
 class BooksController < ApplicationController
   before_action :set_book, :only => [:show, :edit, :update, :destroy]
-  Num_max_per = 3
+  Num_max_per = 10
 
   def index
+    if params[:page]
+      total_pages = Book.all.page(1).per(Num_max_per).total_pages
+      params[:page] = total_pages if params[:page].to_i > total_pages
+    end
     @books = Book.page(params[:page]).per(Num_max_per)
+    $this_page = @books.current_page
+    @count = ($this_page - 1) * Num_max_per
   end
 
   def new
@@ -35,13 +41,13 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_path
+    redirect_to books_path(:page => params[:page])
     flash[:alert] = "刪除成功"
   end
 
   private
     def book_params
-      params.require(:book).permit(:name, :author, :description)
+      params.require(:book).permit(:name, :author, :description, :progress)
     end
     def set_book
       @book = Book.find(params[:id])
