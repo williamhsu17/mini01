@@ -3,17 +3,27 @@ class BooksController < ApplicationController
   Num_max_per = 10
 
   def index
+    if params[:status] == "new"
+      @book = Book.new
+
+    elsif params[:status] == "update"
+      set_book
+    else
+
+    end
     if params[:page]
       total_pages = Book.all.page(1).per(Num_max_per).total_pages
       params[:page] = total_pages if params[:page].to_i > total_pages
     end
     @books = Book.page(params[:page]).per(Num_max_per)
-    $this_page = @books.current_page
-    @count = ($this_page - 1) * Num_max_per
+    this_page = @books.current_page
+    @no_count = (this_page - 1) * Num_max_per
   end
 
   def new
-    @book = Book.new
+    redirect_to books_path( :status => :new,
+                            :set_book_path => books_path,
+                            :set_method => :post)
   end
 
   def show
@@ -47,12 +57,19 @@ class BooksController < ApplicationController
   end
 
   def edit
-
+    redirect_to books_path( :id => params[:id],
+                            :status => :update,
+                            :set_book_path => book_path(@book),
+                            :set_method => :patch)
   end
 
   private
     def book_params
-      params.require(:book).permit(:name, :author, :description, :progress, :published_date)
+      params.require(:book).permit( :name,
+                                    :author,
+                                    :description,
+                                    :progress,
+                                    :published_date)
     end
     def set_book
       @book = Book.find(params[:id])
