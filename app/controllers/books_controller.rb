@@ -14,7 +14,6 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-    render "", :create_new => :true
   end
 
   def show
