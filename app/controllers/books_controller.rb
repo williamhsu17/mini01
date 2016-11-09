@@ -46,6 +46,10 @@ class BooksController < ApplicationController
     flash[:alert] = "刪除成功"
   end
 
+  def edit
+
+  end
+
   private
     def book_params
       params.require(:book).permit(:name, :author, :description, :progress)
