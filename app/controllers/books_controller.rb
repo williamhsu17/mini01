@@ -35,7 +35,8 @@ class BooksController < ApplicationController
       redirect_to book_path(@book)
       flash[:notice] = "更新成功"
     else
-      render edit_book_path(@book)
+      # render edit_book_path(@book)
+      render "books/edit"
     end
   end
 
