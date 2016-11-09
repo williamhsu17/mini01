@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108072751) do
+ActiveRecord::Schema.define(version: 20161109071554) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.text     "description_short"
-    t.integer  "progress"
+    t.integer  "progress",          default: 0
     t.text     "source"
     t.string   "recommender"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "author"
     t.string   "Category"
   end
