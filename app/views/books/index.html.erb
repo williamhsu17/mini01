@@ -15,9 +15,8 @@
             <th class = "text-center">書名</th>
             <th class = "text-center">分類</th>
             <th class = "text-center">作者</th>
-            <th class = "text-center">說明</th>
             <th class = "text-center">閱讀進度</th>
-            <th class = "text-center">加入日期</th>
+            <th class = "text-center">出版日期</th>
             <th class = "text-center">細節</th>
             <th class = "text-center">編輯</th>
             <th class = "text-center">刪除</th>
@@ -30,10 +29,9 @@
             <td><%= book.name %></td>
             <td class = "text-center"><%= book.Category %></td>
             <td><%= book.author %></td>
-            <td><%= book.description_short %></td>
             <td class = "text-center"><%= content_tag(:div, content_tag(:div, "#{book.progress}%", class: "progress-bar", role: "progressbar", "aria-valuenow" => "#{book.progress}", "aria-valuemin" => "0", "aria-valuemax" => "100", style: "width: #{book.progress}%;") , class: "progress") %>
             </td>
-            <td><%= book.created_at %></td>
+            <td><%= book.published_date %></td>
 
             <td><%= link_to "", book_path(book), :class => "btn btn-default glyphicon glyphicon-th-list" %></td>
             <td><%= link_to "", edit_book_path(book), :class => "btn btn-default glyphicon glyphicon-edit" %></td>
